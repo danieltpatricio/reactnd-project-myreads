@@ -22,7 +22,7 @@ export default function ListSearch (props){
                                     <div className="book-title">{book.title}</div>
                                     {tryAuthor(book)}
                                 </div>
-                                <OptionsSearch shelf ={book.shelf?book.shelf:'none'} moveBook={(value) => moveBook(value,book)} ></OptionsSearch>
+                                <OptionsSearch shelf ={book.shelf?book.shelf:"none"} moveBook={(value) => moveBook(value,book)} ></OptionsSearch>
                             </ListItem>
                         )    
                         })

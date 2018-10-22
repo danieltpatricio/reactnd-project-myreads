@@ -12,8 +12,8 @@ class BooksApp extends Component {
   render() {
     return (    
       <div className="app">
-        <Route path='/search' component={Search}/> 
-        <Route exact path='/' component={Main}/> 
+        <Route path="/search" component={Search}/> 
+        <Route exact path="/" component={Main}/> 
       </div>
     )
   }

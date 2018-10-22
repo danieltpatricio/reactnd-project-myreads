@@ -20,7 +20,7 @@ export default function OptionsBooks (props){
                             )
                         })
                     }
-                    <option value='none' key="none" >None</option>
+                    <option value="none" key="none" >None</option>
                 </select>
             </div>
         );

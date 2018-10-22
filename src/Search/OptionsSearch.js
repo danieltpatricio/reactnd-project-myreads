@@ -21,7 +21,7 @@ export default function OptionsSearch (props){
                         })
 
                     }
-                <option value='none' key='none' >None</option>
+                <option value="none" key="none" >None</option>
             </select>
         </div>
     )
