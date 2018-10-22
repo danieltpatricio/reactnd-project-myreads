@@ -26,6 +26,22 @@ export default class Main extends Component{
         })
     }
 
+    tryImage = (book) =>{ 
+        try{ return <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div> }
+        catch(error){ return <div className="book-cover" style={{ width: 128, height: 193 ,backgroundColor: 'lightgray'}}></div> }
+    }
+
+    tryAuthor = (book) =>{
+        try{
+            return (
+                book.authors.map ((author)=>{
+                    return <div key={author} className="book-authors">{author}</div>
+                })
+            )
+        }
+        catch(error){}
+    }
+
     render(){
         const {books} = this.state
 
@@ -41,7 +57,13 @@ export default class Main extends Component{
                             <div className="bookshelf" key={shelf.id}>
                             <h2 className="bookshelf-title">{shelf.title}</h2>
                             <div className="bookshelf-books">
-                            <ListMain books={books} filter={this.filter(shelf.id)} shelf={shelf.id} moveBook={this.moveBook}></ListMain>
+                            <ListMain 
+                                books={books} 
+                                tryImage={this.tryImage} 
+                                tryAuthor={this.tryAuthor} 
+                                filter={this.filter(shelf.id)} 
+                                shelf={shelf.id} 
+                                moveBook={this.moveBook}></ListMain>
                             </div>
                         </div>
                         )

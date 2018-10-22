@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 
 export default function ListMain (props){
-    const {moveBook,filter} = props
+    const {moveBook,filter,tryImage,tryAuthor} = props
     
     
     return(
@@ -13,14 +13,11 @@ export default function ListMain (props){
                 <li key={book.id}> 
                     <div className="book">
                         <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
+                            {tryImage(book)}
                             <OptionsMain shelf ={book.shelf} moveBook={(value) => moveBook(value,book)}></OptionsMain>
                         </div>
                         <div className="book-title">{book.title}</div>
-                        {book.authors.map ((author)=>{
-                            return <div key={author} className="book-authors">{author}</div>
-                        })
-                        }
+                        {tryAuthor(book)}
                     </div>
                 </li>
                 ))
