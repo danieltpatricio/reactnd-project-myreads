@@ -100,7 +100,24 @@ body, .app {
 }
 
 .search-books-results {
-  padding: 80px 10px 20px;
+  padding: 80px 50px 20px;
+  margin-bottom:10px; 
+  
+}
+.box-search{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 0 6px rgba(0,0,0,0.23);
+}
+.total-search{
+  padding-top: 50px;
+  text-align: center;
+}
+.select-search{
+    background: #60ac5d; 
+    background-position: center;  
+    height:48px;
+    width: 100px;
+    font-family:Arial, Helvetica, sans-serif; 
+    color:white;
 }
 
 /* books grid */
