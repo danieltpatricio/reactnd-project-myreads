@@ -1,17 +1,19 @@
 import React,{Component} from 'react'
-import * as BooksAPI from '../config/BooksAPI'
+import * as BooksAPI from './config/BooksAPI'
 import ListSearch from './ListSearch'
 import { Link } from 'react-router-dom'
+import { debounce } from "throttle-debounce";
 
 export default class Search extends Component{
     state = {
         books: [],
-        booksSearch:[]
-        
+        booksSearch:[],
+        value:""
     } 
 
     componentDidMount(){
-        BooksAPI.getAll().then(Books =>(Books)).then(books => this.setState({books: books}))
+        BooksAPI.getAll().then(books => this.setState({books: books}))
+        this.searchApiDebounced = debounce(0, this.searchApiBooks)
     }
 
     searchApiBooks = (value) =>{     
@@ -22,13 +24,9 @@ export default class Search extends Component{
         ))
     }
 
-    handleChange = value => {    
-        this.searchApiBooks(value) 
-    };
-
-    mergeBooks = (booksSearch) =>{
+    mergeBooks = booksSearch =>{
         this.setState(currentState =>{
-            booksSearch.map(item => {
+            booksSearch.forEach(item => {
                 const book = currentState.books.find(k => k.id === item.id );
                 return book ? item.shelf = book.shelf :[]
             })
@@ -37,15 +35,17 @@ export default class Search extends Component{
         })
     }
 
-
-
-    moveBook = (shelf,book) => {
-        BooksAPI.update(book.id,shelf).then(
-          BooksAPI.getAll().then(books => this.setState({books: books}))
-          ).then( this.mergeBooks(this.state.booksSearch))
-    } 
-
+    handleChange = event => {
+        this.setState({ value: event.target.value }, () => {
+            this.searchApiDebounced(this.state.value);
+        });
+    };
     
+    moveBook = (event,book) => {
+        BooksAPI.update(book,event.target.value).then(()=>
+          BooksAPI.getAll().then(books => this.setState({books: books}))
+          ).then(()=> this.mergeBooks(this.state.booksSearch))
+    } 
 
     tryImage = (book) =>{ 
         try{ return <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div> }
@@ -63,7 +63,6 @@ export default class Search extends Component{
         catch(error){}
     }
 
-
     render(){
         const {value,booksSearch} = this.state
 
@@ -75,7 +74,7 @@ export default class Search extends Component{
                         <div className="search-books-input-wrapper">
                             <input type="text" 
                             value={value}
-                            onChange={(e)=>this.handleChange(e.target.value)}
+                            onChange={this.handleChange}
                             placeholder="Search by title or author"/>
                         </div>
                     </div>

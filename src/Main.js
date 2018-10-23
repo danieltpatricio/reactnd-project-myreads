@@ -1,21 +1,20 @@
 import React,{Component} from 'react'
 import ListMain from './ListMain'
 import { Link } from 'react-router-dom'
-import Shelfs from '../config/Shelfs'
-import * as BooksAPI from '../config/BooksAPI'
+import * as Global from './config/Global'
+import * as BooksAPI from './config/BooksAPI'
 
 export default class Main extends Component{
     state = {
         books: []
     }
-
   
     componentDidMount(){
         BooksAPI.getAll().then(Books =>(Books)).then(books => this.setState({books: books}))
     }
 
-    moveBook = (shelf,book) => {
-        BooksAPI.update(book.id,shelf).then(
+    moveBook = (event,book) => {
+        BooksAPI.update(book,event.target.value).then(()=>
           BooksAPI.getAll().then(books => this.setState({books: books}))
           )
     } 
@@ -24,22 +23,6 @@ export default class Main extends Component{
         return this.state.books.filter((c) =>{
             return c.shelf === shelf;
         })
-    }
-
-    tryImage = (book) =>{ 
-        try{ return <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div> }
-        catch(error){ return <div className="book-cover" style={{ width: 128, height: 193 ,backgroundColor: 'lightgray'}}></div> }
-    }
-
-    tryAuthor = (book) =>{
-        try{
-            return (
-                book.authors.map ((author)=>{
-                    return <div key={author} className="book-authors">{author}</div>
-                })
-            )
-        }
-        catch(error){}
     }
 
     render(){
@@ -52,9 +35,8 @@ export default class Main extends Component{
                 </div>
                 <div className="list-books-content">
                     <div>
-                    {Shelfs.map((shelf) =>{
-                        return(
-                            <div className="bookshelf" key={shelf.id}>
+                    {Global.SHELFS.map(shelf =>(
+                        <div className="bookshelf" key={shelf.id}>
                             <h2 className="bookshelf-title">{shelf.title}</h2>
                             <div className="bookshelf-books">
                             <ListMain 
@@ -66,8 +48,7 @@ export default class Main extends Component{
                                 moveBook={this.moveBook}></ListMain>
                             </div>
                         </div>
-                        )
-                    })
+                    ))
                     }
                     </div>
                 </div>
