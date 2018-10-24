@@ -1,8 +1,8 @@
 import React,{Component} from 'react'
 import ListMain from './ListMain'
 import { Link } from 'react-router-dom'
-import * as Global from './config/Global'
-import * as BooksAPI from './config/BooksAPI'
+import * as GLOBAL from '../config/Global'
+import * as BooksAPI from '../config/BooksAPI'
 
 export default class Main extends Component{
     state = {
@@ -35,14 +35,12 @@ export default class Main extends Component{
                 </div>
                 <div className="list-books-content">
                     <div>
-                    {Global.SHELFS.map(shelf =>(
+                    {GLOBAL.SHELFS.map(shelf =>(
                         <div className="bookshelf" key={shelf.id}>
                             <h2 className="bookshelf-title">{shelf.title}</h2>
                             <div className="bookshelf-books">
                             <ListMain 
                                 books={books} 
-                                tryImage={this.tryImage} 
-                                tryAuthor={this.tryAuthor} 
                                 filter={this.filter(shelf.id)} 
                                 shelf={shelf.id} 
                                 moveBook={this.moveBook}></ListMain>

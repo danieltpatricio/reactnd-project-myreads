@@ -26,14 +26,14 @@ This my first project of course React of udacity MyReads: "No projeto MyReads, v
     │   ├── ListSearch.js # Used for list the books 
     │   ├── OptionsSearch.js # used select of shelf book
     │   └── Search.js  # Root of Search page
-    ├── config # configurations globals of app
+    ├── config # configurations GLOBALs of app
     │   ├── BooksAPI.js # A JavaScript API for the provided Udacity backend. Instructions for the methods are below.
-    │   └── Shelfs.js # Array of static and global shelfs of books
+    │   └── Shelfs.js # Array of static and GLOBAL shelfs of books
     ├── icons # Helpful images for your app. Use at your discretion.
     │   ├── add.svg
     │   ├── arrow-back.svg
     │   └── arrow-drop-down.svg
-    ├── index.css # Global styles. You probably won't need to change anything here.
+    ├── index.css # GLOBAL styles. You probably won't need to change anything here.
     └── index.js # You should not need to modify this file. It is used for DOM rendering only.
 
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import OptionsBook from './OptionsBook'
+import OptionsSearch from './OptionsSearch'
 import {List,ListItem} from '@material-ui/core'
 import PropTypes from 'prop-types'
-import * as Global from './config/Global'
+import * as GLOBAL from '../config/Global'
 
 export default function ListSearch (props){
     const {books,moveBook} = props
@@ -17,12 +17,15 @@ export default function ListSearch (props){
                     {books.map((book) => {
                         return(          
                             <ListItem key={book.id} className="search-books-results box-search">
-                                {Global.tryImage(book)}
+                                {GLOBAL.tryImage(book)}
                                 <div  style={{marginLeft: 10}}>
                                     <div className="book-title">{book.title}</div>
-                                    {Global.tryAuthor(book)}
+                                    {GLOBAL.tryAuthor(book)}
                                 </div>
-                                <OptionsBook typeOption="list" shelf ={book.shelf?book.shelf:"none"} moveBook={(event)=>moveBook(event,book.id)} ></OptionsBook>
+                                <OptionsSearch 
+                                    shelf ={book.shelf?book.shelf:"none"} 
+                                    moveBook={(event)=>moveBook(event,book.id)} >
+                                </OptionsSearch>
                             </ListItem>
                         )    
                         })

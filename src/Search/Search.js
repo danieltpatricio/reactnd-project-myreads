@@ -1,5 +1,5 @@
 import React,{Component} from 'react'
-import * as BooksAPI from './config/BooksAPI'
+import * as BooksAPI from '../config/BooksAPI'
 import ListSearch from './ListSearch'
 import { Link } from 'react-router-dom'
 import { debounce } from "throttle-debounce";
@@ -78,7 +78,7 @@ export default class Search extends Component{
                             placeholder="Search by title or author"/>
                         </div>
                     </div>
-                    <ListSearch books={booksSearch} tryImage={this.tryImage} tryAuthor={this.tryAuthor} moveBook={this.moveBook}></ListSearch>
+                    <ListSearch books={booksSearch}  moveBook={this.moveBook}></ListSearch>
                 </div>
             </div>
         )
