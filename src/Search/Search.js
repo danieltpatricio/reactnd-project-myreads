@@ -47,22 +47,6 @@ export default class Search extends Component{
           ).then(()=> this.mergeBooks(this.state.booksSearch))
     } 
 
-    tryImage = (book) =>{ 
-        try{ return <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div> }
-        catch(error){ return <div className="book-cover" style={{ width: 128, height: 193 ,backgroundColor: 'lightgray'}}></div> }
-    }
-
-    tryAuthor = (book) =>{
-        try{
-            return (
-                book.authors.map ((author)=>{
-                    return <div key={author} className="book-authors">{author}</div>
-                })
-            )
-        }
-        catch(error){}
-    }
-
     render(){
         const {value,booksSearch} = this.state
 

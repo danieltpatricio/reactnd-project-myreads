@@ -6,6 +6,7 @@ import MenuItem  from '@material-ui/core/MenuItem';
 
 export default function OptionsSearch (props){
     const {shelf,moveBook} = props
+    
     return(
         <div style={{position: "absolute", right: 30}}>
             <Select
